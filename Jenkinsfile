@@ -16,7 +16,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t $DOCKER_IMAGE .'
+                    sh 'sudo docker build -t $DOCKER_IMAGE .'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh 'docker run -d -p 8081:80 --name test-php $DOCKER_IMAGE'
+                    sh 'sudo docker run -d -p 8081:80 --name test-php $DOCKER_IMAGE'
                 }
             }
         }
@@ -32,8 +32,8 @@ pipeline {
         stage('Clean Up') {
             steps {
                 script {
-                    sh 'docker stop test-php'
-                    sh 'docker rm test-php'
+                    sh 'sudo docker stop test-php'
+                    sh 'sudo docker rm test-php'
                 }
             }
         }
@@ -41,7 +41,7 @@ pipeline {
     
     post {
         always {
-            sh 'docker rmi $DOCKER_IMAGE'
+            sh 'sudo docker rmi $DOCKER_IMAGE'
         }
     }
 }
