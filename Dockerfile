@@ -1,4 +1,4 @@
-# Use the official Debian image as base
+# Use the official Debian:bullseye image as base
 FROM debian:bullseye-slim
 
 # Set non-interactive mode for apt
